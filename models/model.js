@@ -3,6 +3,15 @@ var Schema = mongoose.Schema;
 
 // See http://mongoosejs.com/docs/schematypes.html
 
+var teacherSchema= new Schema({
+	name: String,
+	yearGraduated: Number,
+	classesTaught: [String],
+	bio: String,
+	
+
+})
+
 var animalSchema = new Schema({
 	name: String,
 	// name: {type: String, required: true}, // this version requires this field to exist

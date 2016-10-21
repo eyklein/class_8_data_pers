@@ -11,21 +11,46 @@ var Animal = require("../models/model.js");
  * @param  {Object} req
  * @return {Object} json
  */
-router.get('/', function(req, res) {
-  
-  var jsonData = {
-  	'name': 'node-express-api-boilerplate',
-  	'api-status':'OK'
+
+router.get('/', function(req, res){
+  console.log('home pageendpoint');
+
+  var data ={
+    status: 'ok',
+    name: 'hello week 8'
   }
 
-  // respond with json data
-  res.json(jsonData)
+  res.json(data);
+
 });
 
-// simple route to show an HTML page
-router.get('/sample-page', function(req,res){
-  res.render('sample.html')
-})
+router.post('/api/save', function(req, res){
+  console.log('home pageendpoint');
+
+  console.log(req.body)
+
+  res.json(req);
+
+});
+
+
+
+
+// router.get('/', function(req, res) {
+  
+//   var jsonData = {
+//   	'name': 'node-express-api-boilerplate',
+//   	'api-status':'OK'
+//   }
+
+//   // respond with json data
+//   res.json(jsonData)
+// });
+
+// // simple route to show an HTML page
+// router.get('/sample-page', function(req,res){
+//   res.render('sample.html')
+// })
 
 // /**
 //  * POST '/api/create'
@@ -34,56 +59,56 @@ router.get('/sample-page', function(req,res){
 //  * @return {Object} JSON
 //  */
 
-router.post('/api/create', function(req, res){
+// router.post('/api/create', function(req, res){
 
-    console.log(req.body);
+//     console.log(req.body);
 
-    // pull out the information from the req.body
-    var name = req.body.name;
-    var age = req.body.age;
-    var tags = req.body.tags.split(","); // split string into array
-    var weight = req.body.weight;
-    var color = req.body.color;
-    var url = req.body.url;
+//     // pull out the information from the req.body
+//     var name = req.body.name;
+//     var age = req.body.age;
+//     var tags = req.body.tags.split(","); // split string into array
+//     var weight = req.body.weight;
+//     var color = req.body.color;
+//     var url = req.body.url;
 
-    // hold all this data in an object
-    // this object should be structured the same way as your db model
-    var animalObj = {
-      name: name,
-      age: age,
-      tags: tags,
-      description: {
-        weight: weight,
-        color: color
-      },
-      url: url
-    };
+//     // hold all this data in an object
+//     // this object should be structured the same way as your db model
+//     var animalObj = {
+//       name: name,
+//       age: age,
+//       tags: tags,
+//       description: {
+//         weight: weight,
+//         color: color
+//       },
+//       url: url
+//     };
 
-    // create a new animal model instance, passing in the object
-    var animal = new Animal(animalObj);
+//     // create a new animal model instance, passing in the object
+//     var animal = new Animal(animalObj);
 
-    // now, save that animal instance to the database
-    // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model-save    
-    animal.save(function(err,data){
-      // if err saving, respond back with error
-      if (err){
-        var error = {status:'ERROR', message: 'Error saving animal'};
-        return res.json(error);
-      }
+//     // now, save that animal instance to the database
+//     // mongoose method, see http://mongoosejs.com/docs/api.html#model_Model-save    
+//     animal.save(function(err,data){
+//       // if err saving, respond back with error
+//       if (err){
+//         var error = {status:'ERROR', message: 'Error saving animal'};
+//         return res.json(error);
+//       }
 
-      console.log('saved a new animal!');
-      console.log(data);
+//       console.log('saved a new animal!');
+//       console.log(data);
 
-      // now return the json data of the new animal
-      var jsonData = {
-        status: 'OK',
-        animal: data
-      }
+//       // now return the json data of the new animal
+//       var jsonData = {
+//         status: 'OK',
+//         animal: data
+//       }
 
-      return res.json(jsonData);
+//       return res.json(jsonData);
 
-    })  
-});
+//     })  
+// });
 
 // /**
 //  * GET '/api/get/:id'
